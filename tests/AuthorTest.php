@@ -194,4 +194,25 @@
             $this->assertEquals([$test_book, $test_book2], $test_author->getBooks());
         }
 
+        function testSearchName()
+        {
+            //Arrange
+            $name = "Nathan Young";
+            $id = null;
+            $test_author = new Author($name, $id);
+            $test_author->save();
+
+            $name2 = "Kyle Pratuch";
+            $test_author2 = new Author($name2, $id);
+            $test_author2->save();
+
+            $search_string = "Kyle Pratuch";
+
+            //Act
+            $result = Author::searchName($search_string);
+
+            //Assert
+            $this->assertEquals([$test_author2], $result);
+        }
+
     }

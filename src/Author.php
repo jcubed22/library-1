@@ -78,6 +78,20 @@
             return $found_author;
         }
 
+        static function searchName($search_name)
+        {
+            $found_authors = array();
+            $results = $GLOBALS['DB']->query("SELECT * FROM authors WHERE name = '{$search_name}';");
+
+            foreach($results as $author) {
+                $name = $author['name'];
+                $id = $author['id'];
+                $found_author = new Author ($name, $id);
+                array_push($found_authors, $found_author);
+            }
+            return $found_authors;
+        }
+
         function getBooks()
         {
             $books = array();
@@ -101,8 +115,6 @@
             $GLOBALS['DB']->exec("INSERT INTO authors_books (author_id, book_id) VALUES
                 ({$this->getId()}, {$new_book->getId()});");
         }
-
-
 
     }
 ?>

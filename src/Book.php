@@ -62,8 +62,7 @@
 
         function update($new_title)
         {
-            $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}' WHERE
-                id = {$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}' WHERE id = {$this->getId()};");
             $this->setTitle($new_title);
         }
 
@@ -84,6 +83,21 @@
                 }
             }
             return $found_book;
+        }
+
+        static function searchTitle($search_title)
+        {
+            $found_books = array();
+            $results = $GLOBALS['DB']->query("SELECT * FROM books WHERE title = '{$search_title}';");
+
+            foreach($results as $book) {
+                $title = $book['title'];
+                $year_published = $book['year_published'];
+                $id = $book['id'];
+                $found_book = new Book ($title, $year_published, $id);
+                array_push($found_books, $found_book);
+            }
+            return $found_books;
         }
 
         function getAuthors()
