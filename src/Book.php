@@ -36,7 +36,7 @@
 
         function save()
         {
-            $statement = $GLOBALS['DB']->exec("INSERT INTO books (title, year_published) VALUES
+            $GLOBALS['DB']->exec("INSERT INTO books (title, year_published) VALUES
                 ('{$this->getTitle()}',
                 {$this->getYearPublished()})
             ;");
@@ -61,6 +61,32 @@
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM books;");
+        }
+
+        function update($new_title)
+        {
+            $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}' WHERE
+                id = {$this->getId()};");
+            $this->setTitle($new_title);
+        }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM books WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM authors_books WHERE book_id = {$this->getId()};");
+        }
+
+        static function find($search_id)
+        {
+            $found_book = null;
+            $books = Book::getAll();
+            foreach($books as $book) {
+                $book_id = $book->getId();
+                if ($book_id == $search_id) {
+                    $found_book = $book;
+                }
+            }
+            return $found_book;
         }
 
 
