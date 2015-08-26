@@ -37,11 +37,8 @@
         function save()
         {
             $GLOBALS['DB']->exec("INSERT INTO books (title, year_published) VALUES
-                ('{$this->getTitle()}',
-                {$this->getYearPublished()})
-            ;");
-
-            $this->id = $GLOBALS['DB']->lastInsertId();
+                ('{$this->getTitle()}', {$this->getYearPublished()});");
+                $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
         static function getAll()
@@ -89,19 +86,13 @@
             return $found_book;
         }
 
-        function addAuthor($author)
-        {
-            $GLOBALS['DB']->exec("INSERT INTO authors_books (author_id, book_id) VALUES
-                ({$this->getId()}, {$author->getId()});");
-        }
-
         function getAuthors()
         {
             $authors = array();
             $results = $GLOBALS['DB']->query("SELECT authors.* FROM
-                books   JOIN authors_books ON (books.id = authors_books.book_id)
-                        JOIN authors ON (authors_books.author_id = authors.id)
-                        WHERE books.id = {$this->getId()};");
+                books JOIN authors_books ON (books.id = authors_books.book_id)
+                      JOIN authors ON (authors_books.author_id = authors.id)
+                      WHERE books.id = {$this->getId()};");
 
             foreach($results as $author) {
                 $name = $author['name'];
@@ -112,19 +103,11 @@
             return $authors;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+        function addAuthor($new_author)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO authors_books (author_id, book_id) VALUES
+                ({$new_author->getId()}, {$this->getId()});");
+        }
 
     }
 ?>

@@ -6,6 +6,7 @@
     */
 
     require_once "src/Author.php";
+    require_once "src/Book.php";
 
     $server = 'mysql:host=localhost;dbname=library_test';
     $username = 'root';
@@ -17,6 +18,8 @@
         protected function tearDown()
         {
             Author::deleteAll();
+            Book::deleteAll();
+            $GLOBALS['DB']->exec("DELETE FROM authors_books;");
         }
 
         function testSave()
@@ -142,6 +145,53 @@
             //Assert
             $result = Author::find($id);
             $this->assertEquals($test_author, $result);
+        }
+
+        function testAddBook()
+        {
+            //Arrange
+            $title = "Eat a Cupcake";
+            $year_published = 1999;
+            $id = null;
+            $test_book = new Book($title, $year_published, $id);
+            $test_book->save();
+
+            $name = "Nathan Young";
+            $test_author = new Author($name, $id);
+            $test_author->save();
+
+            //Act
+            $test_author->addBook($test_book);
+
+            //Assert
+            $this->assertEquals([$test_book], $test_author->getBooks());
+        }
+
+
+        function testGetBooks()
+        {
+            //Arrange
+            $title = "Where the Red Fern Grows";
+            $year_published = 1961;
+            $id = null;
+            $test_book = new Book($title, $year_published, $id);
+            $test_book->save();
+
+            $title2 = "Where the Wild Things Are";
+            $year_published2 = 1964;
+            $test_book2 = new Book($title2, $year_published2, $id);
+            $test_book2->save();
+
+            $name = "Nathan Young";
+            $test_author = new Author($name, $id);
+            $test_author->save();
+
+            //Act
+            $test_author->addBook($test_book);
+            $test_author->addBook($test_book2);
+
+            //Assert
+            $this->assertEquals([$test_book, $test_book2], $test_author->getBooks());
         }
 
     }

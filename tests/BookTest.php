@@ -19,6 +19,7 @@
         {
             Book::deleteAll();
             Author::deleteAll();
+            $GLOBALS['DB']->exec("DELETE FROM authors_books;");
         }
 
         function testSave()
@@ -164,14 +165,13 @@
         function testAddAuthor()
         {
             //Arrange
-            $title = "Math Isn't Fun";
+            $title = "Eat a Cupcake";
             $year_published = 1999;
             $id = null;
             $test_book = new Book($title, $year_published, $id);
             $test_book->save();
 
             $name = "Nathan Young";
-            $id = null;
             $test_author = new Author($name, $id);
             $test_author->save();
 
@@ -179,35 +179,34 @@
             $test_book->addAuthor($test_author);
 
             //Assert
-            $this->assertEquals($test_book->getAuthors(), [$test_author]);
+            $this->assertEquals([$test_author], $test_book->getAuthors());
         }
 
 
-        // function testGetAuthors()
-        // {
-        //     //Arrange
-        //     $title = "Math Isn't Fun";
-        //     $year_published = 1999;
-        //     $id = null;
-        //     $test_book = new Book($title, $year_published, $id);
-        //     $test_book->save();
-        //
-        //     $name = "Nathan Young";
-        //     $id = null;
-        //     $test_author = new Author($name, $id);
-        //     $test_author->save();
-        //
-        //     $name2 = "Kyle Pratuch";
-        //     $test_author2 = new Author($name2, $id);
-        //     $test_author2->save();
-        //
-        //     //Act
-        //     $test_book->addAuthor($test_author);
-        //     $test_book->addAuthor($test_author2);
-        //
-        //     //Assert
-        //     $this->assertEquals($test_book->getAuthors(), [$test_author, $test_author2]);
-        // }
+        function testGetAuthors()
+        {
+            //Arrange
+            $title = "Eat a Cupcake";
+            $year_published = 1999;
+            $id = null;
+            $test_book = new Book($title, $year_published, $id);
+            $test_book->save();
+
+            $name = "Nathan Young";
+            $test_author = new Author($name, $id);
+            $test_author->save();
+
+            $name2 = "Kyle Pratuch";
+            $test_author2 = new Author($name2, $id);
+            $test_author2->save();
+
+            //Act
+            $test_book->addAuthor($test_author);
+            $test_book->addAuthor($test_author2);
+
+            //Assert
+            $this->assertEquals([$test_author, $test_author2], $test_book->getAuthors());
+        }
 
 
 
