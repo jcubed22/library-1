@@ -24,7 +24,7 @@ This app will allow users to manage the books, authors, patrons, copies, and che
 PHP, phpunit, Silex, Twig, HTML, CSS, Boostrap, Symfony, MySQL, PhpMyAdmin, MAMP
 
 ## TO DO:
-**Please refer to the included screenshot for the intended DB design. You don't have to follow it though, :)
+**Please refer to the included screenshot for the intended DB design. You don't have to follow it, though. :)
 - Finish building and testing Copy and Patron classes. (Count # of copies, allow books to be checked out)
 
 - Build front end in Silex/Twig.
