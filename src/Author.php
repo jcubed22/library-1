@@ -50,6 +50,8 @@
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM authors;");
+            // clear all data in authors_books table
+            $GLOBALS['DB']->exec("DELETE FROM authors_books;");
         }
 
         function update($new_author_name)
