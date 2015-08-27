@@ -124,15 +124,11 @@
         function getCopies()
         {
             // Should get amount of copies of a particular book
-            $results = $GLOBALS['DB']->query(
-            "SELECT copies.* FROM
-                    books JOIN copies ON (copies.book_id = books.id)
-                    WHERE books.id = {$this->getId()};"
-            );
+            $results = $GLOBALS['DB']->query("SELECT * FROM copies WHERE book_id = {$this->getId()};");
+            $copies = $results->fetchAll(PDO::FETCH_ASSOC);
+            $count = count($copies);
 
-            $copies = count($results);
-
-            return $copies;
+            return $count;
         }
 
         function getInventory()

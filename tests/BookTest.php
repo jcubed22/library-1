@@ -219,7 +219,24 @@
 
         function testAddCopy()
         {
+            //Arrange
+            $title = "Where the Red Fern Grows";
+            $id = null;
+            $test_book = new Book($title, $id);
+            $test_book->save();
 
+            $title2 = "Where the Wild Things Are";
+            $test_book2 = new Book($title2, $id);
+            $test_book2->save();
+
+            //Act
+            $test_book->addCopy();
+            $test_book->addCopy();
+            $test_book->addCopy();
+            $result = 3;
+
+            //Assert
+            $this->assertEquals($test_book->getCopies(), $result);
         }
 
 
