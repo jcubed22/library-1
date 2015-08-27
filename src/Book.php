@@ -3,14 +3,12 @@
     class Book
     {
         private $title;
-        private $year_published;
         private $id;
 
 
-        function __construct($title, $year_published, $id=null)
+        function __construct($title, $id = null)
         {
             $this->title = $title;
-            $this->year_published = $year_published;
             $this->id = $id;
         }
 
@@ -24,11 +22,6 @@
             return $this->title;
         }
 
-        function getYearPublished()
-        {
-            return $this->year_published;
-        }
-
         function getId()
         {
             return $this->id;
@@ -36,8 +29,8 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO books (title, year_published) VALUES
-                ('{$this->getTitle()}', {$this->getYearPublished()});");
+            $GLOBALS['DB']->exec("INSERT INTO books (title) VALUES
+                ('{$this->getTitle()}');");
                 $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -47,9 +40,8 @@
             $books = array();
             foreach ($returned_books as $book) {
                 $title = $book['title'];
-                $year_published = $book['year_published'];
                 $id = $book['id'];
-                $new_book = new Book($title, $year_published, $id);
+                $new_book = new Book($title, $id);
                 array_push($books, $new_book);
             }
             return $books;
@@ -92,9 +84,8 @@
 
             foreach($results as $book) {
                 $title = $book['title'];
-                $year_published = $book['year_published'];
                 $id = $book['id'];
-                $found_book = new Book ($title, $year_published, $id);
+                $found_book = new Book ($title, $id);
                 array_push($found_books, $found_book);
             }
             return $found_books;
@@ -109,9 +100,9 @@
                       WHERE books.id = {$this->getId()};");
 
             foreach($results as $author) {
-                $name = $author['name'];
+                $author_name = $author['author_name'];
                 $id = $author['id'];
-                $new_author = new Author($name, $id);
+                $new_author = new Author($author_name, $id);
                 array_push($authors, $new_author);
             }
             return $authors;

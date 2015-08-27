@@ -25,9 +25,9 @@
         function testSave()
         {
             //Arrange
-            $name = "Nathan Young";
+            $author_name = "Nathan Young";
             $id = null;
-            $test_author = new Author($name, $id);
+            $test_author = new Author($author_name, $id);
 
             //Act
             $test_author->save();
@@ -40,13 +40,13 @@
         function testGetAll()
         {
             //Arrange
-            $name = "Nathan Young";
+            $author_name = "Nathan Young";
             $id = null;
-            $test_author = new Author($name, $id);
+            $test_author = new Author($author_name, $id);
             $test_author->save();
 
-            $name2 = "Kyle Pratuch";
-            $test_author2 = new Author($name2, $id);
+            $author_name2 = "Kyle Pratuch";
+            $test_author2 = new Author($author_name2, $id);
             $test_author2->save();
 
             //Act
@@ -59,13 +59,13 @@
         function testDeleteAll()
         {
             //Arrange
-            $name = "Nathan Young";
+            $author_name = "Nathan Young";
             $id = null;
-            $test_author = new Author($name, $id);
+            $test_author = new Author($author_name, $id);
             $test_author->save();
 
-            $name2 = "Kyle Pratuch";
-            $test_author2 = new Author($name2, $id);
+            $author_name2 = "Kyle Pratuch";
+            $test_author2 = new Author($author_name2, $id);
             $test_author2->save();
 
             //Act
@@ -79,9 +79,9 @@
         function testGetId()
         {
             //Arrange
-            $name = "Nathan Young";
+            $author_name = "Nathan Young";
             $id = null;
-            $test_author = new Author($name, $id);
+            $test_author = new Author($author_name, $id);
             $test_author->save();
 
             //Act
@@ -94,9 +94,9 @@
         function testUpdate()
         {
             //Arrange
-            $name = "Nathan Young";
+            $author_name = "Nathan Young";
             $id = null;
-            $test_author = new Author($name, $id);
+            $test_author = new Author($author_name, $id);
             $test_author->save();
 
             $new_name = "Kyle Pratuch";
@@ -105,19 +105,19 @@
             $test_author->update($new_name);
 
             //Assert
-            $this->assertEquals("Kyle Pratuch", $test_author->getName());
+            $this->assertEquals("Kyle Pratuch", $test_author->getAuthorName());
         }
 
         function testDelete()
         {
             //Arrange
-            $name = "Nathan Young";
+            $author_name = "Nathan Young";
             $id = null;
-            $test_author = new Author($name, $id);
+            $test_author = new Author($author_name, $id);
             $test_author->save();
 
-            $name2 = "Kyle Pratuch";
-            $test_author2 = new Author($name2, $id);
+            $author_name2 = "Kyle Pratuch";
+            $test_author2 = new Author($author_name2, $id);
             $test_author2->save();
 
             //Act
@@ -130,13 +130,13 @@
         function testFind()
         {
             //Arrange
-            $name = "Nathan Young";
+            $author_name = "Nathan Young";
             $id = null;
-            $test_author = new Author($name, $id);
+            $test_author = new Author($author_name, $id);
             $test_author->save();
 
-            $name2 = "Kyle Pratuch";
-            $test_author2 = new Author($name2, $id);
+            $author_name2 = "Kyle Pratuch";
+            $test_author2 = new Author($author_name2, $id);
             $test_author2->save();
 
             //Act
@@ -156,8 +156,8 @@
             $test_book = new Book($title, $year_published, $id);
             $test_book->save();
 
-            $name = "Nathan Young";
-            $test_author = new Author($name, $id);
+            $author_name = "Nathan Young";
+            $test_author = new Author($author_name, $id);
             $test_author->save();
 
             //Act
@@ -182,8 +182,8 @@
             $test_book2 = new Book($title2, $year_published2, $id);
             $test_book2->save();
 
-            $name = "Nathan Young";
-            $test_author = new Author($name, $id);
+            $author_name = "Nathan Young";
+            $test_author = new Author($author_name, $id);
             $test_author->save();
 
             //Act
@@ -194,22 +194,22 @@
             $this->assertEquals([$test_book, $test_book2], $test_author->getBooks());
         }
 
-        function testSearchName()
+        function testSearchAuthorName()
         {
             //Arrange
-            $name = "Nathan Young";
+            $author_name = "Nathan Young";
             $id = null;
-            $test_author = new Author($name, $id);
+            $test_author = new Author($author_name, $id);
             $test_author->save();
 
-            $name2 = "Kyle Pratuch";
-            $test_author2 = new Author($name2, $id);
+            $author_name2 = "Kyle Pratuch";
+            $test_author2 = new Author($author_name2, $id);
             $test_author2->save();
 
             $search_string = "Kyle Pratuch";
 
             //Act
-            $result = Author::searchName($search_string);
+            $result = Author::searchAuthorName($search_string);
 
             //Assert
             $this->assertEquals([$test_author2], $result);
