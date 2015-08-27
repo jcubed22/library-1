@@ -21,6 +21,7 @@
             Book::deleteAll();
             Author::deleteAll();
             $GLOBALS['DB']->exec("DELETE FROM authors_books;");
+            $GLOBALS['DB']->exec("DELETE FROM copies;");
         }
 
         function testSave()
@@ -217,6 +218,7 @@
             $this->assertEquals([$test_book2], $result);
         }
 
+        // test that you can add a copy and returns number of copies of a specific book
         function testAddCopy()
         {
             //Arrange
@@ -231,12 +233,58 @@
 
             //Act
             $test_book->addCopy();
-            $test_book->addCopy();
-            $test_book->addCopy();
-            $result = 3;
+            $test_book2->addCopy();
+            $result = 1;
 
             //Assert
             $this->assertEquals($test_book->getCopies(), $result);
+        }
+
+        // function testGetInventoryCount()
+        // {
+        //     //Arrange
+        //     $title = "Where the Red Fern Grows";
+        //     $id = null;
+        //     $test_book = new Book($title, $id);
+        //     $test_book->save();
+        //
+        //     $title2 = "Where the Wild Things Are";
+        //     $test_book2 = new Book($title2, $id);
+        //     $test_book2->save();
+        //
+        //     //Act
+        //     $test_book->addCopy();
+        //     $test_book2->addCopy();
+        //     $result = 2;
+        //
+        //     //Assert
+        //     $this->assertEquals(Book::getInventory(), $result);
+        // }
+
+        function testGetInventory()
+        {
+            //Arrange
+            $title = "Where the Red Fern Grows";
+            $title2 = "Clowns";
+            $title3 = "Puppes";
+            $id = null;
+            $test_book = new Book($title, $id);
+            $test_book2 = new Book($title2, $id);
+            $test_book3 = new Book($title3, $id);
+            $test_book->save();
+            $test_book2->save();
+            $test_book3->save();
+
+            //Act
+            $test_book->addCopy();
+            $test_book2->addCopy();
+            $test_book3->addCopy();
+
+            $collection_of_cooks = Book::getAll();
+            $result = Book::getInventory($collection_of_books);
+
+            //Assert
+            $this->assertEquals(array($title, $title2, $title3), $result);
         }
 
 

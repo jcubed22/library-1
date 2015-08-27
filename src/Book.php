@@ -121,29 +121,64 @@
                 ({$this->getId()});");
         }
 
+        // finds the amount of copies of a specific book
         function getCopies()
         {
-            // Should get amount of copies of a particular book
-            $results = $GLOBALS['DB']->query("SELECT * FROM copies WHERE book_id = {$this->getId()};");
+            $results = $GLOBALS['DB']->query("SELECT * FROM copies
+                WHERE book_id = {$this->getId()};");
             $copies = $results->fetchAll(PDO::FETCH_ASSOC);
             $count = count($copies);
 
             return $count;
         }
 
-        function getInventory()
+        // returns total number of books (including duplicates) in library
+        // static function printCopies()
+        // {
+        //     $results = $GLOBALS['DB']->query("SELECT * FROM copies;");
+        //     $inventory = $results->fetchAll(PDO::FETCH_ASSOC);
+        //     $count = count($inventory);
+        //
+        //     return $count;
+        // }
+
+        static function getInventory($complete_inventory)
         {
-            // Should show full inventory (including duplicates)
-            // $returned_authors = $GLOBALS['DB']->query("SELECT * FROM authors;");
-            // $authors = array();
-            // foreach ($returned_authors as $author) {
-            //     $author_name = $author['author_name'];
-            //     $id = $author['id'];
-            //     $new_author = new Author ($author_name, $id);
-            //     array_push($authors, $new_author);
+            $returned_inventory = $GLOBALS['DB']->query("SELECT * FROM books
+                WHERE book_id = {$complete_inventory};");
+            $copies = array();
+            foreach($returned_inventory as $inventory) {
+                $id = $inventory['id'];
+                $book_id = $inventory['book_id'];
+
+            }
+            // // Creating an array of all entries in Copies table for a particular Book_ID
+            // $results = $GLOBALS['DB']->query("SELECT * FROM copies
+            //     WHERE book_id = {$this->getId()};");
+            // $copies = $results->fetchAll(PDO::FETCH_ASSOC);
+            // // var_dump($copies);
+            // // Empty array to hold inventory of all instances of same book and their titles
+            // $inventory = array();
+            // $books = Book::getAll();
+            // // var_dump($books);
+            // // Loop through each book_id one by one
+            // foreach($copies as $copy) {
+            //     // refers to specific book_id from copy table
+            //     $copy_book_id = $copy['book_id'];
+            //     // getting array of ALL book_ids and titles from Book table
+            //     // loop through all books in book table
+            //     foreach($books as $book) {
+            //          //returns the book name
+            //         if ($book->getId() == $copy_book_id) {
+            //             $found_book = $book->getTitle();
+            //             array_push($inventory, $found_book);
+            //         }
+            //     }
             // }
-            // return $authors;
+            // return $inventory;
         }
+
+
 
     }
 ?>
