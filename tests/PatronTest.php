@@ -99,8 +99,49 @@
 
             //Assert
             $this->assertEquals([$test_patron], $result);
-
         }
+
+        function testDeletePatron()
+        {
+            //Arrange
+            $patron_name = "Mr. Pickles";
+            $id = null;
+            $test_patron = new Patron($patron_name, $id);
+            $test_patron->save();
+
+            $patron_name2 = "John Doe";
+            $test_patron2 = new Patron($patron_name2, $id);
+            $test_patron2->save();
+
+            //Act
+            $test_patron2->delete();
+
+            //Assert
+            $result = Patron::getAll();
+            $this->assertEquals([$test_patron], $result);
+        }
+
+        function testPatronFind()
+        {
+            //Arrange
+            $patron_name = "Mr. Pickles";
+            $id = null;
+            $test_patron = new Patron($patron_name, $id);
+            $test_patron->save();
+
+            $patron_name2 = "John Doe";
+            $test_patron2 = new Patron($patron_name2, $id);
+            $test_patron2->save();
+
+
+            //Act
+            $id = $test_patron2->getId();
+
+            //Assert
+            $result = Patron::find($id);
+            $this->assertEquals($test_patron2, $result);
+        }
+
     }
 
 ?>
