@@ -1,5 +1,5 @@
 <?php
-
+    /* The Patron class should track a library patron's info and be able to join the checkouts table*/
     //UNFINISHED!
     Class Patron
     {
