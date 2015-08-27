@@ -1,5 +1,5 @@
 <?php
-
+    /* The Copy class should keep track of the number of copies of a given book in the library database. */
     //UNFINISHED!
     class Copy
     {
