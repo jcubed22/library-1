@@ -1,5 +1,6 @@
 <?php
-    /* The Copy class should keep track of the number of copies of a given book in the library database. */
+    /* The Copy class should keep track of the number of copies of a given book in the library database. It should be able to
+    join the checkouts table. */
     //UNFINISHED!
     class Copy
     {
