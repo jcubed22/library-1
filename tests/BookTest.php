@@ -27,9 +27,8 @@
         {
             //Arrange
             $title = "Where the Red Fern Grows";
-            $year_published = 1961;
             $id = null;
-            $test_book = new Book($title, $year_published, $id);
+            $test_book = new Book($title, $id);
 
             //Act
             $test_book->save();
@@ -45,14 +44,12 @@
         {
             //Arrange
             $title = "Where the Red Fern Grows";
-            $year_published = 1961;
             $id = null;
-            $test_book = new Book($title, $year_published, $id);
+            $test_book = new Book($title, $id);
             $test_book->save();
 
             $title2 = "Where the Wild Things Are";
-            $year_published2 = 1964;
-            $test_book2 = new Book($title2, $year_published2, $id);
+            $test_book2 = new Book($title2, $id);
             $test_book2->save();
 
             //Act
@@ -66,14 +63,12 @@
         {
             //Arrange
             $title = "Where the Red Fern Grows";
-            $year_published = 1961;
             $id = null;
-            $test_book = new Book($title, $year_published, $id);
+            $test_book = new Book($title, $id);
             $test_book->save();
 
             $title2 = "Where the Wild Things Are";
-            $year_published2 = 1964;
-            $test_book2 = new Book($title2, $year_published2, $id);
+            $test_book2 = new Book($title2, $id);
             $test_book2->save();
 
             //Act
@@ -88,9 +83,8 @@
         {
             //Arrange
             $title = "Where the Red Fern Grows";
-            $year_published = 1961;
             $id = null;
-            $test_book = new Book($title, $year_published, $id);
+            $test_book = new Book($title, $id);
             $test_book->save();
 
             //Act
@@ -104,9 +98,8 @@
         {
             //Arrange
             $title = "Where the Red Fern Grows";
-            $year_published = 1961;
             $id = null;
-            $test_book = new Book($title, $year_published, $id);
+            $test_book = new Book($title, $id);
             $test_book->save();
 
             $new_title = "Where the Green Fern Dies";
@@ -123,14 +116,12 @@
         {
             //Arrange
             $title = "Where the Red Fern Grows";
-            $year_published = 1961;
             $id = null;
-            $test_book = new Book($title, $year_published, $id);
+            $test_book = new Book($title, $id);
             $test_book->save();
 
             $title2 = "Where the Wild Things Are";
-            $year_published2 = 1964;
-            $test_book2 = new Book($title2, $year_published2, $id);
+            $test_book2 = new Book($title2, $id);
             $test_book2->save();
 
             //Act
@@ -145,14 +136,12 @@
         {
             //Arrange
             $title = "Where the Red Fern Grows";
-            $year_published = 1961;
             $id = null;
-            $test_book = new Book($title, $year_published, $id);
+            $test_book = new Book($title, $id);
             $test_book->save();
 
             $title2 = "Where the Wild Things Are";
-            $year_published2 = 1964;
-            $test_book2 = new Book($title2, $year_published2, $id);
+            $test_book2 = new Book($title2, $id);
             $test_book2->save();
 
             //Act
@@ -167,9 +156,8 @@
         {
             //Arrange
             $title = "Eat a Cupcake";
-            $year_published = 1999;
             $id = null;
-            $test_book = new Book($title, $year_published, $id);
+            $test_book = new Book($title, $id);
             $test_book->save();
 
             $name = "Nathan Young";
@@ -188,9 +176,8 @@
         {
             //Arrange
             $title = "Eat a Cupcake";
-            $year_published = 1999;
             $id = null;
-            $test_book = new Book($title, $year_published, $id);
+            $test_book = new Book($title, $id);
             $test_book->save();
 
             $name = "Nathan Young";
@@ -213,14 +200,12 @@
         {
             //Arrange
             $title = "Where the Red Fern Grows";
-            $year_published = 1961;
             $id = null;
-            $test_book = new Book($title, $year_published, $id);
+            $test_book = new Book($title, $id);
             $test_book->save();
 
             $title2 = "Where the Wild Things Are";
-            $year_published2 = 1964;
-            $test_book2 = new Book($title2, $year_published2, $id);
+            $test_book2 = new Book($title2, $id);
             $test_book2->save();
 
             $search_string = "Where the Wild Things Are";
@@ -230,6 +215,10 @@
 
             //Assert
             $this->assertEquals([$test_book2], $result);
+        }
+
+        function testAddCopy()
+        {
 
         }
 

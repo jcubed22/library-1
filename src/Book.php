@@ -114,5 +114,40 @@
                 ({$new_author->getId()}, {$this->getId()});");
         }
 
+        // Should add a book id and title into the copy table
+        function addCopy()
+        {
+            $GLOBALS['DB']->exec("INSERT INTO copies (book_id) VALUES
+                ({$this->getId()});");
+        }
+
+        function getCopies()
+        {
+            // Should get amount of copies of a particular book
+            $results = $GLOBALS['DB']->query(
+            "SELECT copies.* FROM
+                    books JOIN copies ON (copies.book_id = books.id)
+                    WHERE books.id = {$this->getId()};"
+            );
+
+            $copies = count($results);
+
+            return $copies;
+        }
+
+        function getInventory()
+        {
+            // Should show full inventory (including duplicates)
+            // $returned_authors = $GLOBALS['DB']->query("SELECT * FROM authors;");
+            // $authors = array();
+            // foreach ($returned_authors as $author) {
+            //     $author_name = $author['author_name'];
+            //     $id = $author['id'];
+            //     $new_author = new Author ($author_name, $id);
+            //     array_push($authors, $new_author);
+            // }
+            // return $authors;
+        }
+
     }
 ?>
